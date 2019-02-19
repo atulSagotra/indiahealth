@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign</title>
+</head>
+<body>
+<div>
+
+<button type="button" onclick="location.href='{% url 'log' %}'">Logout</button>
+    </div>
+<H2>Add Doctor's details</H2>
+<form action="/post_create/" method="post">
+    {% csrf_token %}
+    Doctor Name : <input type="text" name="doctor name" required><br><br>
+    Email : <input type="email" name = "doctor email" required><br><br>
+    Phone Number : <input type="number" name ="doctor num" required><br><br>
+    Experience : <input type="number" name = "doctor exp" required> <br><br>
+    Gender: <input type="radio" name="doctor gender" value="male"> Male
+  <input type="radio" name="doctor gender" value="female"> Female<br><br>
+    Speciaity: <textarea rows="5" cols="40" name="doctor speciality" required></textarea>
+    <br><br>
+    <input type="submit" value="Submit">
+
+</form>
+</body>
+</html>

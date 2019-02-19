@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Update profile</h1>
+    <form action="/postprofile/" method="post">
+    {% csrf_token %}
+    Hospital Name : <input type="text" name="hospital name" required><br><br>
+    Hospital Email : <input type="email" name = "hospital email" required><br><br>
+    Hospital Contact Number : <input type="number" name ="hospital num" required><br><br>
+    Hospital Address : <input type="text" name = "hosital address" required> <br><br>
+    Chair Person: <input type="text" name="hospital chair"><br><br>
+    Services: <br><input type="checkbox" name="services" value="Accidental">Accidental<br>
+  <input type="checkbox" name="services" value="Accidental"> Accidental<br>
+  <input type="checkbox" name="servvices" value="Accidental" checked> Accidental<br><br>
+    Chair person Number:  <input type="number" name ="hospital chair num" required><br><br>
+    <input type="submit" value="Submit">
+</body>
+</html>

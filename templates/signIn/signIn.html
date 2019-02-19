@@ -1,0 +1,128 @@
+<html lang="en">
+{% load staticfiles %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login/Signup</title>
+    <script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/signIn/style.css' %}">
+</head>
+<body>
+
+    <div class="login-header">
+        <div class="logo-container">
+            <div class="logo"></div>
+            <div class="site-name roboto">Website</div>
+        </div>
+    </div>
+    <div class="form-container">
+        <div class="row m-0 w-100 h-100">
+            <div class="col-md-5 sign-user border-rad-10-left h-100">
+                <div class="sign-user-container">
+                    <h1 class="roboto text-white sign-user-container-head">Welcome Again</h1>
+                    <p class="text-white text-center sign-user-container-p">
+                        Welcome here! You can join our org.
+                        please login here with your account.
+                        Please login here with your.
+                    </p>
+                    <h2 class="sign-user-container-head-2 text-white">New User?</h2>
+                    <button type="button" onclick="toggle(this)" class="sign-toggle">Sign Up</button>
+                </div>
+            </div>
+            <div class="col-md-7 h-100 bg-white user-form-container">
+                <div class="form-carrier text-center h-100 roboto">
+                    <h2 class="create-account">Log In</h2>
+
+                    <form action="postsign/" method="post" id="signin-form" class="sign-user-form">
+                         {% csrf_token %}
+                        <div class="form-group">
+                          <input required type="email" class="form-control border-radius-50 input-control" placeholder="username" name="sign-in-uid" id="signin-uid">
+                        </div>
+                        <div class="form-group">
+                            <input required type="password" class="form-control border-radius-50 input-control" placeholder="password" name="sign-in-pwd" id="signin-pwd">
+                        </div>
+                        {% if msg %}
+                    <p>{{ msg }}</p>
+                    {% endif %}
+                        <div class="text-center mt-4"> <input type = "submit" name="signin" id="signin" class="submit roboto">
+                        </div>
+                    </form>
+
+                    <form action="postsignup/" id="signup-form" method="post" class="sign-user-form none" onsubmit="return validateSignUp()">
+                        {% csrf_token %}
+                        <div class="form-group">
+                          <input required type="username" class="form-control border-radius-50 input-control" placeholder="username" name="name" id="signup-username">
+                        </div>
+                        <div class="form-group">
+                          <input required type="email" class="form-control border-radius-50 input-control" placeholder="email" name="email" id="signup-uid">
+                        </div>
+                        <div class="form-group">
+                            <input required type="password" class="form-control border-radius-50 input-control" placeholder="password" name="pwd" id="signup-pwd">
+                        </div>
+                        <div class="form-group">
+                            <input required type="password"  class="form-control border-radius-50 input-control" placeholder="confirm password" name="cpwd" id="cpwd">
+                        </div>
+                        <div class="text-center mt-4"> <input name="signup" id="signup" type="submit" class="submit roboto" value = "Sign Up"> </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <script src="{% static 'js/signIn/script.js'%}"></script>
+    <script>
+                function toggle(e){
+            let z = e.innerHTML;
+            if(z=='Sign Up'){
+                document.getElementById('signin-form').style.display = 'none';
+                document.getElementById('signup-form').style.display = 'block';
+                document.querySelector('.sign-user-container-head').innerHTML = "Join Here";
+                document.querySelector('.sign-user-container-p').innerHTML = "Welcome here! You can join our org. Hey there! To keep connected with us Please Signup here with your account.";
+                e.innerHTML = 'Log In';
+                document.querySelector('.create-account').innerHTML = 'Sign Up';
+                document.querySelector('.sign-user-container-head-2').innerHTML = 'Already have <br>an account?'
+                document.querySelector('.sign-user-container-head-2').style.marginTop = '95px';
+
+            } else {
+                document.getElementById('signin-form').style.display = 'block';
+                document.getElementById('signup-form').style.display = 'none';
+                document.querySelector('.sign-user-container-head').innerHTML = "Join Here";
+                document.querySelector('.sign-user-container-p').innerHTML = "Welcome here! You can join our org. Please login here with your account. Please login here with your.";
+                e.innerHTML = 'Sign Up';
+                document.querySelector('.create-account').innerHTML = 'Log In';
+                document.querySelector('.sign-user-container-head-2').innerHTML = 'New User?'
+                document.querySelector('.sign-user-container-head-2').style.marginTop = '55px';
+            }
+        }
+        function validateSignUp(){
+            x = document.querySelector('#signup-pwd').value;
+            y = document.querySelector('#cpwd').value;
+            if(x!=y){
+                window.alert('Passwords do not match');
+                return false;
+            }
+            if(x.length<6){
+                alert('Length too short.');
+                return false;
+            }
+            //signUp();
+            return true;
+        }
+        function validateSignIn(){
+            x = document.querySelector('#signin-pwd').value;
+            if(x.length<6){
+                alert('Length too short.');
+                return false;
+            }
+            //signIn();
+            return false;
+        }
+
+    </script>
+</body>
+</html>
